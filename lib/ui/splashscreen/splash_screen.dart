@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tubes_gdgoc/ui/test.dart';
 
 import '../../common/navigate.dart';
-import '../auth/login/login_screen.dart';
+import '../auth/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +20,9 @@ class _SplashScreenState extends State<SplashScreen> {
     return Timer(duration, () {
       Navigate.navigatorPushAndRemove(
         context,
-        LoginScreen(),
+        FirebaseAuth.instance.currentUser == null
+            ? LoginScreen()
+            : TestScreen(),
       );
     });
   }

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tubes_gdgoc/common/navigate.dart';
 import 'package:tubes_gdgoc/common/validate.dart';
-import 'package:tubes_gdgoc/ui/splashscreen/splash_screen.dart';
+import 'package:tubes_gdgoc/ui/test.dart';
 
-import '../../widget/custom_textfield.dart';
-import '../../widget/googleSignIn_button.dart';
-import '../../widget/loading_animation.dart';
+import '../../service/firebase_service.dart';
+import '../widget/custom_textfield.dart';
+import '../widget/loading_animation.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
@@ -85,9 +85,23 @@ class RegisterScreen extends StatelessWidget {
                                   color: Colors.white,
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600)),
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               _isLoad.value = true;
+                              await FirebaseService()
+                                  .signUpEmail(
+                                    context,
+                                    username: _usernameController.text,
+                                    email: _emailController.text,
+                                    pass: _passwordController.text,
+                                  )
+                                  .then(
+                                    (value) => value
+                                        ? Navigate.navigatorPushAndRemove(
+                                            context, TestScreen())
+                                        : null,
+                                  );
+                              _isLoad.value = false;
                             }
                           },
                           child: Text("Daftar"),

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "577705412509",
+    "project_id": "tubesgdgoc",
+    "storage_bucket": "tubesgdgoc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577705412509:android:70661d6ecc6e3ecd869174",
+        "android_client_info": {
+          "package_name": "com.example.tubes_gdgoc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNX-i-raQzzdq1V18lBL-mFXuVTb0oeZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

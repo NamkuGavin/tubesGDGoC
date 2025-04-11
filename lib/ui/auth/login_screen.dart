@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tubes_gdgoc/common/navigate.dart';
 import 'package:tubes_gdgoc/common/validate.dart';
+import 'package:tubes_gdgoc/ui/navigation/buttonNav.dart';
 import 'package:tubes_gdgoc/ui/test.dart';
 
 import '../../service/firebase_service.dart';
@@ -90,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                                   .then(
                                     (value) => value
                                         ? Navigate.navigatorPushAndRemove(
-                                            context, const TestScreen())
+                                            context, const ButtonNav())
                                         : null,
                                   );
                               _isLoad.value = false;

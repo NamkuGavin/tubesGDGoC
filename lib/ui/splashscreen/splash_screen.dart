@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tubes_gdgoc/ui/test.dart';
+import 'package:tubes_gdgoc/ui/navigation/buttonNav.dart';
 
 import '../../common/navigate.dart';
 import '../auth/login_screen.dart';
@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
         context,
         FirebaseAuth.instance.currentUser == null
             ? LoginScreen()
-            : TestScreen(),
+            : ButtonNav(),
       );
     });
   }

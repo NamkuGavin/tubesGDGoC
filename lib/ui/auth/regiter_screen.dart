@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tubes_gdgoc/common/navigate.dart';
 import 'package:tubes_gdgoc/common/validate.dart';
-import 'package:tubes_gdgoc/ui/test.dart';
+import 'package:tubes_gdgoc/ui/navigation/buttonNav.dart';
 
 import '../../service/firebase_service.dart';
 import '../widget/custom_textfield.dart';
@@ -98,7 +98,7 @@ class RegisterScreen extends StatelessWidget {
                                   .then(
                                     (value) => value
                                         ? Navigate.navigatorPushAndRemove(
-                                            context, TestScreen())
+                                            context, ButtonNav())
                                         : null,
                                   );
                               _isLoad.value = false;

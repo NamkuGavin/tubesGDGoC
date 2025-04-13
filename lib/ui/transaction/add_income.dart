@@ -2,8 +2,10 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:tubes_gdgoc/common/validate.dart';
 
+import '../../common/notifier.dart';
 import '../../service/firebase_service.dart';
 
 class AddIncome extends StatefulWidget {
@@ -14,12 +16,9 @@ class AddIncome extends StatefulWidget {
 }
 
 class _AddIncomeState extends State<AddIncome> {
-  String _selectedCategory = "Gaji";
   final _formKey = GlobalKey<FormState>();
   final _totalController = TextEditingController();
-  final _dateController = TextEditingController();
   final _descController = TextEditingController();
-
   List<DropdownMenuItem<String>> dropdownItems = [
     DropdownMenuItem(value: "Gaji", child: Text("Gaji")),
     DropdownMenuItem(value: "Bonus", child: Text("Bonus")),
@@ -27,7 +26,7 @@ class _AddIncomeState extends State<AddIncome> {
     DropdownMenuItem(value: "Lainya", child: Text("Lainya")),
   ];
 
-  Future _selectDate() async {
+  Future _selectDate(AppState provider) async {
     DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
@@ -35,27 +34,26 @@ class _AddIncomeState extends State<AddIncome> {
         lastDate: DateTime.now());
 
     if (picked != null) {
-      setState(() {
-        _dateController.text = DateFormat('d MMM yyyy').format(picked);
-      });
+      provider.formatDateControll(picked);
     }
   }
 
-  Future<bool> _addTransaction() async {
-    bool isSuccess = await FirebaseService().addTransaction(
+  Future<bool> _addTransaction(AppState provider) async {
+    bool success = await FirebaseService().addTransaction(
       context,
       type: 'income',
       total: int.parse(_totalController.text),
-      category: _selectedCategory,
-      date: _dateController.text,
+      category: provider.selectedCategory,
+      date: provider.dateController.text,
       desc: _descController.text,
     );
-
-    return isSuccess;
+    return success;
   }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AppState>(context);
+
     return Scaffold(
       appBar: AppBar(
           title: Text("Tambah Pemasukan",
@@ -82,19 +80,22 @@ class _AddIncomeState extends State<AddIncome> {
                   SizedBox(height: 16),
                   Text("Kategori", style: GoogleFonts.inter()),
                   SizedBox(height: 8),
-                  _dropdown(value: _selectedCategory, items: dropdownItems),
+                  _dropdown(
+                      value: provider.selectedCategory,
+                      items: dropdownItems,
+                      provider: provider),
                   SizedBox(height: 16),
                   Text("Tanggal", style: GoogleFonts.inter()),
                   SizedBox(height: 8),
                   InkWell(
                       borderRadius: BorderRadius.circular(8),
                       onTap: () async {
-                        await _selectDate();
+                        await _selectDate(provider);
                       },
                       child: IgnorePointer(
                           child: _textForm(
                               hint: "Masukkan tanggal",
-                              controller: _dateController,
+                              controller: provider.dateController,
                               withIcon: true,
                               validator: (value) =>
                                   ValidatorCode().emptyValidator(value)))),
@@ -122,7 +123,7 @@ class _AddIncomeState extends State<AddIncome> {
                             fontWeight: FontWeight.w600)),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        await _addTransaction().then(
+                        await _addTransaction(provider).then(
                           (value) => value ? Navigator.pop(context) : null,
                         );
                       }
@@ -181,15 +182,15 @@ class _AddIncomeState extends State<AddIncome> {
   }
 
   Widget _dropdown(
-      {required String value, required List<DropdownMenuItem<String>>? items}) {
+      {required String value,
+      required List<DropdownMenuItem<String>>? items,
+      required AppState provider}) {
     return DropdownButtonHideUnderline(
       child: DropdownButton2(
         value: value,
         items: items,
         onChanged: (String? value) {
-          setState(() {
-            _selectedCategory = value!;
-          });
+          provider.changeCategory(value);
         },
         hint: Text("Pilih Kategori", style: GoogleFonts.inter()),
         style: GoogleFonts.inter(color: Colors.black),

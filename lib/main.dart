@@ -33,8 +33,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: ColorScheme.fromSwatch(backgroundColor: Colors.white)),
+      title: 'Tubes GDGoC',
+      theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(backgroundColor: Colors.white)),
       home: SplashScreen(),
     );
   }

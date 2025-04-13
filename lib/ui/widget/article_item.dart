@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tubes_gdgoc/common/navigate.dart';
 
 class ArticlePage extends StatelessWidget {
   final int id;
@@ -30,7 +31,8 @@ class ArticlePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(judul,
-                  style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w700)),
+                  style: GoogleFonts.inter(
+                      fontSize: 20, fontWeight: FontWeight.w700)),
               SizedBox(height: 10),
               Text(subjudul,
                   style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
@@ -41,9 +43,9 @@ class ArticlePage extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     color: Colors.grey),
               ),
-
               SizedBox(height: 16),
-              Text(isiArtikel, style: GoogleFonts.inter(), textAlign: TextAlign.justify),
+              Text(isiArtikel,
+                  style: GoogleFonts.inter(), textAlign: TextAlign.justify),
             ],
           ),
         ),
@@ -71,16 +73,14 @@ class ArticleItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
+        Navigate.navigatorPush(
             context,
-            MaterialPageRoute(
-              builder: (context) => ArticlePage(
-                  id: id,
-                  judul: judul,
-                  subjudul: subjudul,
-                  tanggalPosting: tanggalPosting,
-                  isiArtikel: isiArtikel),
-            ));
+            ArticlePage(
+                id: id,
+                judul: judul,
+                subjudul: subjudul,
+                tanggalPosting: tanggalPosting,
+                isiArtikel: isiArtikel));
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 16),
@@ -105,7 +105,8 @@ class ArticleItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(judul,
-                      style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w500),
+                      style: GoogleFonts.inter(
+                          fontSize: 13, fontWeight: FontWeight.w500),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis),
                   //SizedBox(height: 2),

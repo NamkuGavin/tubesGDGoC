@@ -307,4 +307,87 @@ class FirebaseService {
       return false;
     }
   }
+
+  Future<bool> editTransaction(
+    BuildContext context, {
+    required String docId,
+    required String type,
+    required num total,
+    required num oldTotal,
+    required String category,
+    required String date,
+    required String desc,
+    required String day,
+    required String week,
+  }) async {
+    try {
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+
+      DocumentReference userDocument =
+          FirebaseFirestore.instance.collection('users').doc(uid);
+
+      DocumentReference transactionDocument = FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .collection('transaction')
+          .doc(docId);
+
+      DocumentReference detailTransactionDocument = FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .collection(type)
+          .doc(week);
+
+      FirebaseFirestore.instance.runTransaction(
+        (transaction) async {
+          DocumentSnapshot userSnapshot = await transaction.get(userDocument);
+          DocumentSnapshot detailTransactionSnapshot =
+              await transaction.get(detailTransactionDocument);
+
+          num oldTotalBalance = userSnapshot['total_money'];
+          num oldValueUser = userSnapshot[type];
+          num oldValueDetail = detailTransactionSnapshot['day'][day];
+          num oldValueDetailTotal = detailTransactionSnapshot['total'];
+
+          num newTotalBalance = type == 'income'
+              ? (oldTotalBalance - oldTotal) + total
+              : oldTotalBalance + (oldTotal - total);
+
+          num newValueUser = (oldValueUser - oldTotal) + total;
+
+          num newValueDetail = (oldValueDetail - oldTotal) + total;
+
+          num newValueDetailTotal = (oldValueDetailTotal - oldTotal) + total;
+
+          transaction.update(transactionDocument, {
+            'type': type,
+            'total': total,
+            'category': category,
+            'date': date,
+            'desc': desc,
+            'day': day,
+            'updated_at': DateTime.now(),
+          });
+
+          transaction.update(detailTransactionDocument, {
+            'total': newValueDetailTotal,
+            'day.$day': newValueDetail,
+          });
+
+          transaction.update(userDocument, {
+            type: newValueUser,
+            'total_money': newTotalBalance,
+          });
+        },
+      );
+      return true;
+    } on PlatformException {
+      return false;
+    } on SocketException {
+      showSnackBar(context, title: 'Tidak ada koneksi internet');
+      return false;
+    } on FirebaseException {
+      return false;
+    }
+  }
 }

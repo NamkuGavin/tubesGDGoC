@@ -39,6 +39,7 @@ class TransactionScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Expanded(child: TransactionHistory()),
+              SizedBox(height: 8),
               _button("Tambah Pemasukan", Color(0xFF5EC57E), () {
                 Navigate.navigatorPush(context, AddIncome());
               }),

@@ -27,4 +27,14 @@ class ValidatorCode {
         ? 'Kata sandi tidak boleh kurang dari 6 karakter'
         : null;
   }
+
+  String? transactionValidator(value) {
+    if (value.toString() == '0') {
+      return 'Nominal tidak boleh 0';
+    } else if (value.toString().trim().isEmpty) {
+      return 'Nominal tidak boleh kosong';
+    } else {
+      return null;
+    }
+  }
 }

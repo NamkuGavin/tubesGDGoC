@@ -18,6 +18,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black.withOpacity(0.03),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
@@ -25,7 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               ProfileItem(),
               SizedBox(height: 16),
-              Divider(color: Color(0XFFECEEF2), thickness: 1),
+              Divider(color: Colors.black.withOpacity(0.05), thickness: 1),
               SizedBox(height: 32),
               _menuProfile(),
             ],
@@ -41,6 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         width: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 28, vertical: 30),
         decoration: BoxDecoration(
+          color: Colors.white.withOpacity(1),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(50),
             topRight: Radius.circular(50),

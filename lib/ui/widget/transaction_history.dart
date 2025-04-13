@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tubes_gdgoc/common/navigate.dart';
+import 'package:tubes_gdgoc/ui/transaction/edit_transaction.dart';
 
 import '../../service/firebase_service.dart';
 
@@ -33,7 +35,6 @@ class _TransactionHistoryState extends State<TransactionHistory> {
           return ListView.builder(
             padding: EdgeInsets.zero,
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
             itemCount: widget.isHome
                 ? snapshot.data!.docs.length < 3
                     ? snapshot.data!.docs.length
@@ -44,7 +45,19 @@ class _TransactionHistoryState extends State<TransactionHistory> {
               final type = data['type'];
 
               return GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigate.navigatorPush(
+                      context,
+                      EditTransaction(
+                          type: type,
+                          docId: data.id,
+                          day: data['day'],
+                          week: data['week'],
+                          oldTotal: data['total'],
+                          category: data['category'],
+                          date: data['date'],
+                          desc: data['desc']));
+                },
                 child: Container(
                   padding: EdgeInsets.all(15),
                   width: MediaQuery.of(context).size.width,
@@ -113,7 +126,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                             );
                           },
                           child: Icon(Icons.delete_forever,
-                              color: Colors.redAccent))
+                              color: Colors.redAccent)),
                     ],
                   ),
                 ),

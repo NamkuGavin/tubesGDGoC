@@ -17,7 +17,8 @@ class TransactionItem extends StatelessWidget {
       stream: _document.snapshots(),
       builder: (_, snapshot) {
         if (snapshot.hasData) {
-          if (snapshot.data!.data()!.isEmpty) {
+          var docData = snapshot.data!.data();
+          if (docData == null || docData.isEmpty) {
             return Container(
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
               decoration: BoxDecoration(

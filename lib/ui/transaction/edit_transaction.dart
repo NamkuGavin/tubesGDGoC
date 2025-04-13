@@ -1,22 +1,38 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tubes_gdgoc/common/list_data.dart';
-import 'package:tubes_gdgoc/common/validate.dart';
 
 import '../../common/notifier.dart';
+import '../../common/validate.dart';
 import '../../service/firebase_service.dart';
 
-class AddIncome extends StatefulWidget {
-  const AddIncome({super.key});
+class EditTransaction extends StatefulWidget {
+  final String type;
+  final String docId;
+  final String day;
+  final String week;
+  final num oldTotal;
+  final String category;
+  final String date;
+  final String desc;
+  const EditTransaction(
+      {super.key,
+      required this.type,
+      required this.docId,
+      required this.day,
+      required this.week,
+      required this.oldTotal,
+      required this.category,
+      required this.date,
+      required this.desc});
 
   @override
-  State<AddIncome> createState() => _AddIncomeState();
+  State<EditTransaction> createState() => _EditTransactionState();
 }
 
-class _AddIncomeState extends State<AddIncome> {
+class _EditTransactionState extends State<EditTransaction> {
   final _formKey = GlobalKey<FormState>();
   final _totalController = TextEditingController();
   final _descController = TextEditingController();
@@ -33,16 +49,36 @@ class _AddIncomeState extends State<AddIncome> {
     }
   }
 
-  Future<bool> _addTransaction(AppState provider) async {
-    bool success = await FirebaseService().addTransaction(
-      context,
-      type: 'income',
-      total: int.parse(_totalController.text),
-      category: provider.selectedCategoryIncome,
-      date: provider.dateController.text,
-      desc: _descController.text,
-    );
-    return success;
+  Future<bool> _editTransaction(AppState provider) async {
+    bool isSuccess = await FirebaseService().editTransaction(context,
+        type: widget.type == 'income' ? 'income' : 'spending',
+        total: int.parse(_totalController.text),
+        category: widget.type == 'income'
+            ? provider.selectedCategoryIncome
+            : provider.selectedCategorySpending,
+        date: provider.dateController.text,
+        desc: _descController.text,
+        docId: widget.docId,
+        oldTotal: widget.oldTotal,
+        day: widget.day,
+        week: widget.week);
+
+    return isSuccess;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<AppState>(context, listen: false);
+      widget.type == 'income'
+          ? provider.changeCategoryIncome(widget.category)
+          : provider.changeCategorySpending(widget.category);
+      provider.dateController.text = widget.date;
+
+      _totalController.text = widget.oldTotal.toString();
+      _descController.text = widget.desc;
+    });
   }
 
   @override
@@ -51,13 +87,13 @@ class _AddIncomeState extends State<AddIncome> {
 
     return Scaffold(
       appBar: AppBar(
-          title: Text("Tambah Pemasukan",
+          title: Text("Edit Transaksi",
               style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
           iconTheme: IconThemeData(color: Colors.black)),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.fromLTRB(30, 8, 30, 16),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
             child: Form(
               key: _formKey,
               child: Column(
@@ -76,9 +112,13 @@ class _AddIncomeState extends State<AddIncome> {
                   Text("Kategori", style: GoogleFonts.inter()),
                   SizedBox(height: 8),
                   _dropdown(
-                      value: provider.selectedCategoryIncome,
-                      items: ListData.dropdownIncome,
-                      provider: provider),
+                      provider: provider,
+                      value: widget.type == 'income'
+                          ? provider.selectedCategoryIncome
+                          : provider.selectedCategorySpending,
+                      items: widget.type == 'income'
+                          ? ListData.dropdownIncome
+                          : ListData.dropdownSpending),
                   SizedBox(height: 16),
                   Text("Tanggal", style: GoogleFonts.inter()),
                   SizedBox(height: 8),
@@ -106,8 +146,8 @@ class _AddIncomeState extends State<AddIncome> {
                   SizedBox(height: 24),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
                         backgroundColor: Color(0xFF5EC57E),
+                        foregroundColor: Colors.white,
                         minimumSize: Size(double.infinity, 48),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -118,12 +158,12 @@ class _AddIncomeState extends State<AddIncome> {
                             fontWeight: FontWeight.w600)),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        await _addTransaction(provider).then(
+                        await _editTransaction(provider).then(
                           (value) => value ? Navigator.pop(context) : null,
                         );
                       }
                     },
-                    child: Text("Tambah Pemasukan"),
+                    child: Text("Edit"),
                   ),
                 ],
               ),
@@ -185,7 +225,9 @@ class _AddIncomeState extends State<AddIncome> {
         value: value,
         items: items,
         onChanged: (String? value) {
-          provider.changeCategoryIncome(value);
+          widget.type == 'income'
+              ? provider.changeCategoryIncome(value)
+              : provider.changeCategorySpending(value);
         },
         hint: Text("Pilih Kategori", style: GoogleFonts.inter()),
         style: GoogleFonts.inter(color: Colors.black),

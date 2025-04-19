@@ -1,6 +1,8 @@
 # TUBES GDGoC - Uangku
 Uangku adalah sebuah platform untuk melakukan tracking pemasukan dan pengeluaran uangmu
 
+Drive Tubes GDGoC Aplikasi Uangku: https://drive.google.com/drive/folders/1OJX2dsN-7ygqjVLCQdccHcnYEt7xGK1L?usp=sharing
+
 # Anggota Tim
 1. Muhammad Gavin Arasyi - 103012300262 - S1 Informatika 2023
 2. Edsel Septa Haryanto - 103022300016 - S1 Rekayasa Perangkat Lunak 2023
@@ -14,7 +16,7 @@ Uangku adalah sebuah platform untuk melakukan tracking pemasukan dan pengeluaran
 4. Run code
 
 ## instalasi menggunakan APK
-1. Download APK pada link : https://drive.google.com/file/d/18Nh55m2gMO--EvK8pnGVGipQJiFlabRA/view?usp=sharing
+1. Download APK pada link : https://drive.google.com/file/d/1wEYA58lldDG1UMfoOYjS3AYQBLF8Dk9F/view?usp=sharing
 2. Buka file APK
 3. Instal
 

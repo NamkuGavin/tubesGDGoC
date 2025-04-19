@@ -13,6 +13,11 @@ Uangku adalah sebuah platform untuk melakukan tracking pemasukan dan pengeluaran
 3. Aktifkan emulator android
 4. Run code
 
+## instalasi menggunakan APK
+1. Download APK pada link : https://drive.google.com/file/d/18Nh55m2gMO--EvK8pnGVGipQJiFlabRA/view?usp=sharing
+2. Buka file APK
+3. Instal
+
 # Fitur
 
 ## Fitur Tambah Pendapatan dan Pengeluaran

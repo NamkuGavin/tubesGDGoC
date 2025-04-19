@@ -17,30 +17,37 @@ Uangku adalah sebuah platform untuk melakukan tracking pemasukan dan pengeluaran
 
 ## Fitur Tambah Pendapatan dan Pengeluaran
 ![alt text](https://github.com/NamkuGavin/tubesGDGoC/blob/8fbf7c12be8d5449ba0fde6231c316f97155a437/screenshot/1_Tambah-Pemasukan.png)
+
 Pengguna dapat menambahkan pendapatan dan pengeluaran
 
 ## Tampilan Transaksi
 ![alt text](https://github.com/NamkuGavin/tubesGDGoC/blob/8fbf7c12be8d5449ba0fde6231c316f97155a437/screenshot/2_Nav-Transaksi.png)
+
 Pengguna dapat melihat riwayat pendapatan dan pengeluaran
 
 ## Fitur Edit Pendapatan dan Pengeluaran
 ![alt text](https://github.com/NamkuGavin/tubesGDGoC/blob/8fbf7c12be8d5449ba0fde6231c316f97155a437/screenshot/3_Edit-Transaksi.png)
+
 Pengguna dapat melakukan edit pada riwayat pendapatan dan pengeluaran
 
 ## Tampilan Beranda
 ![alt text](https://github.com/NamkuGavin/tubesGDGoC/blob/8fbf7c12be8d5449ba0fde6231c316f97155a437/screenshot/4_Nav-Homepage.png)
+
 Pengguna dapat melihat halaman beranda
 
 ## Fitur Artikel
 ![alt text](https://github.com/NamkuGavin/tubesGDGoC/blob/8fbf7c12be8d5449ba0fde6231c316f97155a437/screenshot/5_Artikel.png)
+
 Pengguna dapat melihat artikel seputar bidang ekonomi
 
 ## Tampilan Profil
 ![alt text](https://github.com/NamkuGavin/tubesGDGoC/blob/8fbf7c12be8d5449ba0fde6231c316f97155a437/screenshot/6_Nav-Profile.png)
+
 Pengguna dapat melihat profil dan keluar dari akun
 
 ## Edit Profil 
 ![alt text](https://github.com/NamkuGavin/tubesGDGoC/blob/8fbf7c12be8d5449ba0fde6231c316f97155a437/screenshot/7_Edit-Profile.png)
+
 Pengguna dapat mengedit profil yang ia miliki
 
 # Teknologi
@@ -53,65 +60,8 @@ State Management : Provider
 Debugging Devices : Samsung Galaxy A52
 
 # Struktur Folder Project
-tubes_gdgoc/
-├── assets/
-│    ├── icons/             # Berisi ikon-ikon aplikasi (biasanya untuk navigasi atau representasi fitur)
-│    │   ├── article.png
-│    │   ├── home.png
-│    │   ├── home_active.png
-│    │   ├── profile.png
-│    │   ├── profile_active.png
-│    │   ├── transaction.png
-│    │   ├── transaction_active.png
-│    │   ├── transaction_history.png
-│    │   ├── trend_down.png
-│    │   └── trend_up.png
-│    ├── logo/              # Berisi logo-logo penting, seperti logo aplikasi atau logo pihak ketiga
-│    │   ├── google.png
-│    │   └── UangKu_Logo.png
-│    ├── lottie/            # Berisi animasi Lottie dalam format .json
-│    │   └── loading.json
-├── lib/
-│    ├── common/                  # Fungsi umum dan utilitas
-│    │   ├── list_data.dart       # Data statis seperti daftar item/kategori
-│    │   ├── navigate.dart        # Navigasi global/helper
-│    │   ├── notifier.dart        # State notifier atau provider
-│    │   ├── validate.dart        # Fungsi validasi input/form
-│    │   └── model/
-│    │       └── article_model.dart  # Model data untuk artikel
-│    ├── service/                 
-│    │   └── firebase_service.dart # Abstraksi untuk layanan Firebase
-│    ├── ui/                      # Folder utama untuk tampilan (UI) aplikasi
-│    │   ├── auth/                # Layar otentikasi
-│    │   │   ├── login_screen.dart
-│    │   │   └── regiter_screen.dart
-│    │   ├── edit_profile/        # Layar untuk edit profil
-│    │   │   └── edit_profile_screen.dart
-│    │   ├── navigation/          # Navigasi & bottom nav
-│    │   │   ├── buttonNav.dart
-│    │   │   └── menu/
-│    │   │       ├── home.dart
-│    │   │       └── profile.dart
-│    │   ├── splashscreen/
-│    │   │   └── splash_screen.dart
-│    │   ├── transaction/         # Layar transaksi
-│    │   │   ├── transaction.dart
-│    │   │   ├── add_income.dart
-│    │   │   ├── add_spending.dart
-│    │   │   └── edit_transaction.dart
-│    │   └── widget/              # Widget-widget reusable
-│    │       ├── article_item.dart
-│    │       ├── custom_textfield.dart
-│    │       ├── googleSignIn_button.dart
-│    │       ├── loading_animation.dart
-│    │       ├── profile_item.dart
-│    │       ├── snackbar_item.dart
-│    │       ├── total_balance.dart
-│    │       ├── transaction_history.dart
-│    │       └── transaction_item.dart
-│    ├── firebase_options.dart     # Konfigurasi Firebase (dari CLI)
-│    └── main.dart                 # Entry point aplikasi
-├── pubspec.yaml       # File konfigurasi dependensi dan assets
+![alt text](https://github.com/NamkuGavin/tubesGDGoC/blob/803c37cee37ac3f102f0e1d9e4fef6b05760449b/screenshot/struktur%20folder%201.png)
+![alt text] (https://github.com/NamkuGavin/tubesGDGoC/blob/803c37cee37ac3f102f0e1d9e4fef6b05760449b/screenshot/struktur%20folder%202.png)
 
 ## Penjelasan Tambahan
 common/ 

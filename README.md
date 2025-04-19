@@ -61,7 +61,7 @@ Debugging Devices : Samsung Galaxy A52
 
 # Struktur Folder Project
 ![alt text](https://github.com/NamkuGavin/tubesGDGoC/blob/803c37cee37ac3f102f0e1d9e4fef6b05760449b/screenshot/struktur%20folder%201.png)
-![alt text] (https://github.com/NamkuGavin/tubesGDGoC/blob/803c37cee37ac3f102f0e1d9e4fef6b05760449b/screenshot/struktur%20folder%202.png)
+![alt text](https://github.com/NamkuGavin/tubesGDGoC/blob/803c37cee37ac3f102f0e1d9e4fef6b05760449b/screenshot/struktur%20folder%202.png)
 
 ## Penjelasan Tambahan
 common/ 
